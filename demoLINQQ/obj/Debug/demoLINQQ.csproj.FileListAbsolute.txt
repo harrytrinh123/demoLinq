@@ -1,0 +1,11 @@
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\bin\Debug\demoLINQQ.exe.config
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\bin\Debug\demoLINQQ.exe
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\bin\Debug\demoLINQQ.pdb
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.csprojAssemblyReference.cache
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.Form1.resources
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.Properties.Resources.resources
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.csproj.GenerateResource.cache
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.csproj.CoreCompileInputs.cache
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.exe
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.pdb
+E:\.NET\WINFORM\demoLINQQ\demoLINQQ\obj\Debug\demoLINQQ.InsertProduct.resources

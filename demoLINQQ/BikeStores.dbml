@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BikeStores" Class="BikeStoresDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLExpress;Initial Catalog=BikeStores;Integrated Security=True" SettingsObjectName="demoLINQQ.Properties.Settings" SettingsPropertyName="BikeStoresConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="production.brands" Member="brands">
+    <Type Name="brand">
+      <Column Name="brand_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="brand_name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="brand_product" Member="products" ThisKey="brand_id" OtherKey="brand_id" Type="product" />
+    </Type>
+  </Table>
+  <Table Name="production.categories" Member="categories">
+    <Type Name="category">
+      <Column Name="category_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="category_name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="category_product" Member="products" ThisKey="category_id" OtherKey="category_id" Type="product" />
+    </Type>
+  </Table>
+  <Table Name="production.products" Member="products">
+    <Type Name="product">
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="product_name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="brand_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="category_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="model_year" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="list_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Association Name="product_stock" Member="stocks" ThisKey="product_id" OtherKey="product_id" Type="stock" />
+      <Association Name="product_order_item" Member="order_items" ThisKey="product_id" OtherKey="product_id" Type="order_item" />
+      <Association Name="brand_product" Member="brand" ThisKey="brand_id" OtherKey="brand_id" Type="brand" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="category_product" Member="category" ThisKey="category_id" OtherKey="category_id" Type="category" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="production.stocks" Member="stocks">
+    <Type Name="stock">
+      <Column Name="store_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="product_stock" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="store_stock" Member="store" ThisKey="store_id" OtherKey="store_id" Type="store" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="sales.customers" Member="customers">
+    <Type Name="customer">
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="street" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="state" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="zip_code" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Association Name="customer_order" Member="orders" ThisKey="customer_id" OtherKey="customer_id" Type="order" />
+    </Type>
+  </Table>
+  <Table Name="sales.order_items" Member="order_items">
+    <Type Name="order_item">
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="item_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="list_price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="discount" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Association Name="product_order_item" Member="product" ThisKey="product_id" OtherKey="product_id" Type="product" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="order_order_item" Member="order" ThisKey="order_id" OtherKey="order_id" Type="order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="sales.orders" Member="orders">
+    <Type Name="order">
+      <Column Name="order_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="order_status" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="order_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="required_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="shipped_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="store_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="staff_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="order_order_item" Member="order_items" ThisKey="order_id" OtherKey="order_id" Type="order_item" />
+      <Association Name="customer_order" Member="customer" ThisKey="customer_id" OtherKey="customer_id" Type="customer" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="staff_order" Member="staff" ThisKey="staff_id" OtherKey="staff_id" Type="staff" IsForeignKey="true" />
+      <Association Name="store_order" Member="store" ThisKey="store_id" OtherKey="store_id" Type="store" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="sales.staffs" Member="staffs">
+    <Type Name="staff">
+      <Column Name="staff_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="active" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="store_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="manager_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="staff_order" Member="orders" ThisKey="staff_id" OtherKey="staff_id" Type="order" />
+      <Association Name="staff_staff" Member="staffs" ThisKey="staff_id" OtherKey="manager_id" Type="staff" />
+      <Association Name="staff_staff" Member="staff1" ThisKey="manager_id" OtherKey="staff_id" Type="staff" IsForeignKey="true" />
+      <Association Name="store_staff" Member="store" ThisKey="store_id" OtherKey="store_id" Type="store" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="sales.stores" Member="stores">
+    <Type Name="store">
+      <Column Name="store_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="store_name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="phone" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="street" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="state" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="zip_code" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Association Name="store_stock" Member="stocks" ThisKey="store_id" OtherKey="store_id" Type="stock" />
+      <Association Name="store_order" Member="orders" ThisKey="store_id" OtherKey="store_id" Type="order" />
+      <Association Name="store_staff" Member="staffs" ThisKey="store_id" OtherKey="store_id" Type="staff" />
+    </Type>
+  </Table>
+</Database>
