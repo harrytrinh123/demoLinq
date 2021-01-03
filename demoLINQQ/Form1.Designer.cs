@@ -39,6 +39,7 @@ namespace demoLINQQ
             this.cbbOrder = new System.Windows.Forms.ComboBox();
             this.cbbCategories = new System.Windows.Forms.ComboBox();
             this.cbbOrders = new System.Windows.Forms.ComboBox();
+            this.btnFilter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvData)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,8 +129,14 @@ namespace demoLINQQ
             // 
             this.cbbCategories.FormattingEnabled = true;
             this.cbbCategories.Items.AddRange(new object[] {
-            "Category 1",
-            "Category 2"});
+            "Road Bikes",
+            "Children Bicycles",
+            "Comfort Bicycles",
+            "Cruisers Bicycles",
+            "Cyclocross Bicycles",
+            "Electric Bikes",
+            "Mountain Bikes",
+            "Road Bikes"});
             this.cbbCategories.Location = new System.Drawing.Point(585, 505);
             this.cbbCategories.Name = "cbbCategories";
             this.cbbCategories.Size = new System.Drawing.Size(121, 28);
@@ -148,11 +155,22 @@ namespace demoLINQQ
             this.cbbOrders.TabIndex = 3;
             this.cbbOrders.Text = "Hot";
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(896, 505);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(87, 32);
+            this.btnFilter.TabIndex = 4;
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1019, 564);
+            this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.cbbOrders);
             this.Controls.Add(this.cbbCategories);
             this.Controls.Add(this.cbbOrder);
@@ -183,6 +201,7 @@ namespace demoLINQQ
         private System.Windows.Forms.ComboBox cbbOrder;
         private System.Windows.Forms.ComboBox cbbCategories;
         private System.Windows.Forms.ComboBox cbbOrders;
+        private System.Windows.Forms.Button btnFilter;
     }
 }
 
